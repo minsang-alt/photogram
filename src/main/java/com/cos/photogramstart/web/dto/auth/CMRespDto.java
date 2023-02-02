@@ -1,7 +1,5 @@
 package com.cos.photogramstart.web.dto.auth;
 
-import java.util.Map;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
