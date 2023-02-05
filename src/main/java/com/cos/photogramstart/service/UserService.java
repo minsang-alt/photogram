@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
+import com.cos.photogramstart.handler.ex.CustomValidationApiException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,7 +18,8 @@ public class UserService {
 	@Transactional
 	public User 회원수정(int id,User user) {
 		//1.영속화
-		User userEntity = userRepository.findById(id).get();//1.무조건 찾았다 get() 2. 못찾았어 익섹션 발동할게 orElseThrow()
+		User userEntity = userRepository.findById(id).orElseThrow(()-> {	return new CustomValidationApiException("찾을수없는 id입니다");
+	});//1.무조건 찾았다 get() 2. 못찾았어 익섹션 발동할게 orElseThrow()
 		
 		
 		//2.영속화된 오브젝트를 수정 - 더티체킹(업데이트 완료)
