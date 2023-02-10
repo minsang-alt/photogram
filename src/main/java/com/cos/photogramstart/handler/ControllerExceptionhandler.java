@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.photogramstart.handler.ex.CustomApiException;
+import com.cos.photogramstart.handler.ex.CustomException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
 import com.cos.photogramstart.handler.ex.CustomValidationException;
 import com.cos.photogramstart.util.Script;
@@ -22,9 +23,23 @@ public class ControllerExceptionhandler {
 		//1.클라이언트에게 응답할때는 Script 좋음.
 		//2.Ajax통신-CMRespDto
 		//3.Android 통신 -CMRespDto
-		return Script.back(e.getErrorMap().toString());
+		
+		if(e.getErrorMap()==null) {
+			return Script.back(e.getMessage());
+		}else {
+			return Script.back(e.getErrorMap().toString());
+		}
+		
 		//return new CMRespDto<Map<String,String>>(-1,e.getMessage(),e.getErrorMap());
 	
+	
+	}
+	
+	
+	@ExceptionHandler(CustomException.class)//이 예외가 발생하는 모든 exception을 이 함수가 가져간다.
+	public String exception(CustomException e) {
+	
+		return Script.back(e.getMessage());
 	
 	}
 	
