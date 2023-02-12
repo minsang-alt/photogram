@@ -24,6 +24,7 @@ public class UserUpdateDto {
 				.name(name)//이름을 기재 안했으면 문제!! Validation 체크!
 				.password(password) // 만약 사용자가 패스워드를 기제안했으면 공백의 페스워드가 들어가면 문제가 됨 Validaiton 체크
 				.website(website)
+				.bio(bio)
 				.phone(phone)
 				.gender(gender)
 				.build();

@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 
-@Configuration
+@Configuration//IoC 메모리에 띄어야 한다.
 public class WebMvcConfig implements WebMvcConfigurer{//web설정파일
 
 	@Value("${file.path}")
