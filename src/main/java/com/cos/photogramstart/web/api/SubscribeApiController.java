@@ -28,7 +28,9 @@ public class SubscribeApiController {
 	}		
 	@DeleteMapping("/api/subscribe/{toUserId}")
 	public ResponseEntity<?> unSubscribe(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable int toUserId){
-				subscribeService.구독취소하기(principalDetails.getUser().getId(), toUserId);
+	//	System.out.println("여긴오냐?");		
+		subscribeService.구독취소하기(principalDetails.getUser().getId(), toUserId);
+				
 				return new ResponseEntity<>(new CMRespDto<>(1,"구독취소하기 성공",null),HttpStatus.OK);
 	}
 }
