@@ -3,6 +3,7 @@ package com.cos.photogramstart.service;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +24,13 @@ import lombok.RequiredArgsConstructor;
 public class ImageService {
 
 	private final ImageRepository imageRepository;
+	
+	@Transactional(readOnly=true)
+	public List<Image>인기사진(){
+		return imageRepository.mPopular();
+	}
+	
+	
 	
 	@Transactional(readOnly = true)//영속성 컨택스트 변경감지를 해서 더티체킹후 flush(반영)x
 	public Page<Image> 이미지스토리(int principalId,Pageable pageable){
@@ -52,7 +60,7 @@ public class ImageService {
 	public void 사진업로드(ImageUploadDto imageUploadDto,PrincipalDetails principalDetails) {
 		UUID uuid = UUID.randomUUID(); //uuid:네트워크 상에서 고유성이 보장되는 id를 만들기 위한 표준규약
 		String imageFileName = uuid+"_"+imageUploadDto.getFile().getOriginalFilename(); //1.jpg같은 이름이 들어간다
-		System.out.println("이미지 파일 이름: "+imageFileName);
+		//System.out.println("이미지 파일 이름: "+imageFileName);
 		
 		Path imageFilePath = Paths.get(uploadFolder+imageFileName);
 		
